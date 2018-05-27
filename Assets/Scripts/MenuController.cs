@@ -10,13 +10,14 @@ public class MenuController : MonoBehaviour
 
     public GameObject PanelMain, PanelCredits, PanelOptions;
 
-
+    //Build ID scene number for load on start
+    public int SceneToLoad;
     #endregion
 
     // Use this for initialization
     void Start()
     {
-
+        SceneToLoad = 1;
     }
 
     // Update is called once per frame
@@ -27,22 +28,56 @@ public class MenuController : MonoBehaviour
 
     public void OnButtonClick(string button)
     {
+        switch (button)
+        {
+            case "start":
+                StartGame();
+                break;
 
+            case "options":
+                Options();
+                break;
+
+            case "credits":
+                Credits();
+                break;
+
+            case "quit":
+                Quit();
+                break;
+            case "back":
+                Back();
+                break;
+
+            default:
+                break;
+        }
     }
 
     private void StartGame()
     {
-
+        SceneManager.LoadScene(SceneToLoad);
     }
 
     private void Options()
     {
-
+        PanelMain.SetActive(false);
+        PanelCredits.SetActive(false);
+        PanelOptions.SetActive(true);
     }
 
     private void Credits()
     {
+        PanelMain.SetActive(false);
+        PanelCredits.SetActive(true);
+        PanelOptions.SetActive(false);
+    }
 
+    private void Back()
+    {
+        PanelMain.SetActive(true);
+        PanelCredits.SetActive(false);
+        PanelOptions.SetActive(false);
     }
 
     private void Quit()
